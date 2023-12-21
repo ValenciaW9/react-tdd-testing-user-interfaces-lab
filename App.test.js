@@ -1,37 +1,53 @@
-import { render, screen } from "@testing-library/react";
-import App from "../App"; // Import the App component
-import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import App from '../App';
 
-test('renders the App component without errors', () => {
-  render(<App/>);
-});
-
-test('renders the correct heading', () => {
-  render(<App/>);
-  const headingElement = screen.getByText("Hi, I'm (Valencia Diane Walker)");
-  expect(headingElement).toBeInTheDocument();
-});
-
-test('renders the image with the correct alt text', () => {
+test("displays an image of yourself with alt text", () => {
+  // Arrange 
   render(<App />);
-  const imageElement = screen.getByAltText("IMG_2348.jpeg");
-  expect(imageElement).toBeInTheDocument();
+
+  // Act 
+  const image = screen.getByRole("img");
+
+  // Assert
+  expect(image).toBeInTheDocument();
+  expect(image).toHaveAttribute("src", "src/IMG_2348.jpeg");
+  expect(image).toHaveAttribute("alt", "alt text");
 });
 
-test('renders the correct number of links', () => {
+test("displays a second-level heading with the text 'About Me'", () => {
+  // Arrange
   render(<App />);
-  const linkElements = screen.getAllByRole('link');
-  expect(linkElements.length).toBe(4); // Update the expected value to 4
+
+  // Act 
+  const secondLevelHeading = screen.getByRole("heading", { level: 2 });
+
+  // Assert
+  expect(secondLevelHeading).toBeInTheDocument();
+  expect(secondLevelHeading).toHaveTextContent("About Me");
 });
 
-test('renders the correct email addresses', () => {
+test("displays a paragraph with some text", () => {
+  // Arrange
   render(<App />);
-  const emailElements = screen.getAllByText(/@yahoo\.com|@phoenix\.edu/);
-  expect(emailElements.length).toBe(2); // Update the expected value to 2 or the correct number of email addresses
+
+  // Act 
+  const paragraph = screen.getByText("Hi, I'm Valencia Diane Walker");
+
+  // Assert
+  expect(paragraph).toBeInTheDocument();
 });
 
-test('renders the correct phone numbers', () => {
+test("displays two links to your Github and Linkedin pages", () => {
+  // Arrange
   render(<App />);
-  const phoneNumberElements = screen.getAllByText(/(\(\d{3}\)[-.\s]\d{3}[-.\s]\d{4})|(\(\d{3}\)\s\d{3}\s\d{4})/);
-  expect(phoneNumberElements.length).toBe(1); // Update the expected value to 1 or the correct number of phone numbers
+
+  // Act 
+  const githubLink = screen.getByRole("link", { name: "GitHub" });
+  const linkedinLink = screen.getByRole("link", { name: "LinkedIn" });
+
+  // Assert
+  expect(githubLink).toBeInTheDocument();
+  expect(githubLink).toHaveAttribute("href", "https://github.com/ValenciaW9");
+  expect(linkedinLink).toBeInTheDocument();
+  expect(linkedinLink).toHaveAttribute("href", "https://www.linkedin.com/in/valencia-walker-306a7477/");
 });
