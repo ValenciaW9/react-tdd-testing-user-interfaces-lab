@@ -1,24 +1,25 @@
-import { render, screen } from '@testing-library/react';
-import App from '../App';
+iimport { render, screen } from "@testing-library/react";
+import App from "./App";
+import '@testing-library/jest-dom';
 
 test("displays an image of yourself with alt text", () => {
-  // Arrange 
+  // Arrange
   render(<App />);
 
-  // Act 
+  // Act
   const image = screen.getByRole("img");
 
   // Assert
   expect(image).toBeInTheDocument();
-  expect(image).toHaveAttribute("src", "src/IMG_2348.jpeg");
-  expect(image).toHaveAttribute("alt", "alt text");
+  expect(image).toHaveAttribute("src", "IMG_2348.jpeg");
+  expect(image).toHaveAttribute("alt", "IMG_2348.jpeg");
 });
 
 test("displays a second-level heading with the text 'About Me'", () => {
   // Arrange
   render(<App />);
 
-  // Act 
+  // Act
   const secondLevelHeading = screen.getByRole("heading", { level: 2 });
 
   // Assert
@@ -30,7 +31,7 @@ test("displays a paragraph with some text", () => {
   // Arrange
   render(<App />);
 
-  // Act 
+  // Act
   const paragraph = screen.getByText("Hi, I'm Valencia Diane Walker");
 
   // Assert
@@ -41,9 +42,9 @@ test("displays two links to your Github and Linkedin pages", () => {
   // Arrange
   render(<App />);
 
-  // Act 
+  // Act
   const githubLink = screen.getByRole("link", { name: "GitHub" });
-  const linkedinLink = screen.getByRole("link", { name: "LinkedIn" });
+  const linkedinLink = screen.getByRole("link", { name: "https://www.linkedin.com/in/valencia-walker-306a7477/" });
 
   // Assert
   expect(githubLink).toBeInTheDocument();
