@@ -1,10 +1,11 @@
+import './index.css';
 import React from 'react';
-
+import './app.css';
 function App() {
   return (
     <div>
       <h1>Hi, I'm Valencia Diane Walker</h1>
-      <img src="src/IMG_2348.jpeg" alt="Your alt text here" />
+      <img src={require('./IMG_2348.jpeg')} alt="IMG_2348.jpeg" />
       <h2>About Me</h2>
       <p>
         I'm (Valencia Diane Walker)
